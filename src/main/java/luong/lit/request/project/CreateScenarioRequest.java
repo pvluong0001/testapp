@@ -1,7 +1,6 @@
 package luong.lit.request.project;
 
 import lombok.Data;
-import luong.lit.entity.Tag;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotBlank;
@@ -18,5 +17,5 @@ public class CreateScenarioRequest {
     @NotNull
     public String description;
 
-    public List<String> tags;
+    public List<Long> tags;
 }

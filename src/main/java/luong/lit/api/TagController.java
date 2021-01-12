@@ -29,8 +29,7 @@ public class TagController {
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
     public DataResponse create(@Valid @RequestBody CreateTagRequest request) {
-        Tag data = modelMapper.map(request, Tag.class);
-        Tag tag = tagService.store(data);
+        Tag tag = tagService.store(request);
 
         return new DataResponse(tag);
     }

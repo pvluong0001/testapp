@@ -17,8 +17,11 @@ public class TagService {
         return tagRepository.findAll();
     }
 
-    public Tag store(Tag resource) {
-        return tagRepository.save(resource);
+    public Tag store(CreateTagRequest resource) {
+        Tag tag = new Tag();
+        tag.setName(resource.getName());
+
+        return tagRepository.save(tag);
     }
 
     public Tag show(Long id) {

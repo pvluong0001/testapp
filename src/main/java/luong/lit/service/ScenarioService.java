@@ -24,8 +24,6 @@ public class ScenarioService {
     @Autowired
     ModelMapper modelMapper;
 
-    private static final Logger logger = LogManager.getLogger(ScenarioService.class);
-
     public Iterable<Scenario> getAll() {
         return scenarioRepository.findAll();
     }
@@ -35,14 +33,7 @@ public class ScenarioService {
         scenario.setName(createScenarioRequest.getName());
         scenario.setDescription(createScenarioRequest.getDescription());
 
-        List<Tag> tags = createScenarioRequest.getTags()
-                .stream().map(
-                        item -> tagRepository.findByName(item).orElse(new Tag(item))
-                )
-                .collect(Collectors.toList());
-
-        System.out.println(tags);
-        tagRepository.saveAll(tags);
+        List<Tag> tags = (List<Tag>) tagRepository.findAllById(createScenarioRequest.getTags());
 
         scenario.setTags(tags);
 
