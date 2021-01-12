@@ -8,9 +8,10 @@ import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
-@Table(name="scenario")
+@Table(name = "scenario")
 @Data
 public class Scenario {
     @Id
@@ -30,4 +31,12 @@ public class Scenario {
     @UpdateTimestamp
     @Column(name = "updated_at")
     private Date updatedAt;
+
+    @ManyToMany
+    @JoinTable(
+            name = "tag_scenario",
+            joinColumns = @JoinColumn(name = "tag_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "scenario_id", referencedColumnName = "id")
+    )
+    private List<Tag> tags;
 }

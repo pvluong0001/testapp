@@ -15,8 +15,6 @@ public class UuidInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         RequestConstant.uuid = UUID.randomUUID();
         MDC.put("uuid", RequestConstant.uuid.toString());
-
-        System.out.println("run once time");
         return true;
     }
 }

@@ -17,8 +17,6 @@ import javax.validation.Valid;
 public class ScenarioController {
     @Autowired
     ScenarioService scenarioService;
-    @Autowired
-    ModelMapper modelMapper;
 
     @GetMapping()
     public DataResponse all() {
@@ -28,9 +26,7 @@ public class ScenarioController {
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
     public DataResponse create(@Valid @RequestBody CreateScenarioRequest request) {
-        Scenario data = modelMapper.map(request, Scenario.class);
-
-        Scenario scenario = scenarioService.store(data);
+        Scenario scenario = scenarioService.store(request);
 
         return new DataResponse(scenario);
     }
