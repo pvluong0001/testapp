@@ -31,7 +31,7 @@
             <AppenderRef ref="LogToConsole"/>
         </AsyncLogger>
         <Root level="error">
-            <AppenderRef ref="LogToFile"/>
+<!--            <AppenderRef ref="LogToFile"/>-->
             <AppenderRef ref="LogToConsole"/>
         </Root>
     </Loggers>
