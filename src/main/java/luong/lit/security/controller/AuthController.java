@@ -5,15 +5,11 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
-import luong.lit.response.DataResponse;
 import luong.lit.security.entity.ERole;
 import luong.lit.security.entity.Role;
 import luong.lit.security.entity.User;
 import luong.lit.security.jwt.JwtUtils;
-import luong.lit.security.payload.JwtResponse;
-import luong.lit.security.payload.LoginRequest;
-import luong.lit.security.payload.MessageResponse;
-import luong.lit.security.payload.SignupRequest;
+import luong.lit.security.payload.*;
 import luong.lit.security.repository.RoleRepository;
 import luong.lit.security.repository.UserRepository;
 import luong.lit.security.service.UserDetailsImpl;
@@ -76,7 +72,7 @@ public class AuthController {
         if (userRepository.existsByEmail(signUpRequest.getEmail())) {
             return ResponseEntity
                     .badRequest()
-                    .body(new MessageResponse("Error: Email is already taken!"));
+                    .body(new ErrorResponse("Email is already taken!"));
         }
 
         // Create new user's account
@@ -100,6 +96,6 @@ public class AuthController {
         user.setRoles(roles);
         userRepository.save(user);
 
-        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+        return ResponseEntity.ok(new DataResponse());
     }
 }
