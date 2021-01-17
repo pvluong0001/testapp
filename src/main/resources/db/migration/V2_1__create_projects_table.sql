@@ -30,6 +30,8 @@ CREATE TABLE `project_scenario` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `project_id` bigint DEFAULT NULL,
   `scenario_id` bigint DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `description` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   PRIMARY KEY (`id`),
   KEY `fk_project_id_ps` (`project_id`),
   KEY `fk_scenario_id_ps` (`scenario_id`),

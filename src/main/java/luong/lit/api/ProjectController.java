@@ -17,17 +17,13 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("project")
 public class ProjectController {
-    private static final Logger logger = LogManager.getLogger(ProjectController.class);
-
     @Autowired
     ProjectService projectService;
     @Autowired
     ModelMapper modelMapper;
 
     @GetMapping()
-    public DataResponse all() {
-        logger.info("Something good");
-
+    public DataResponse all() throws InterruptedException {
         return new DataResponse(projectService.getAll());
     }
 

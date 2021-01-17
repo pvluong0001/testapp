@@ -8,6 +8,7 @@ import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name="projects")
@@ -32,4 +33,12 @@ public class Project {
 
     @Column(name = "deleted_at")
     private Date deletedAt;
+
+    @ManyToMany
+    @JoinTable(
+            name = "project_scenario",
+            joinColumns = @JoinColumn(name = "scenario_id"),
+            inverseJoinColumns = @JoinColumn(name = "project_id")
+    )
+    private List<Scenario> scenarios;
 }
