@@ -1,9 +1,7 @@
 package luong.lit.service;
 
-import luong.lit.entity.Scenario;
 import luong.lit.entity.Tag;
 import luong.lit.repository.TagRepository;
-import luong.lit.request.project.CreateScenarioRequest;
 import luong.lit.request.project.CreateTagRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,5 +38,9 @@ public class TagService {
 
     public void delete(Long id) {
         tagRepository.deleteById(id);
+    }
+
+    public Iterable<Tag> searchByName(String name) {
+        return tagRepository.findByNameContainingIgnoreCase(name);
     }
 }
