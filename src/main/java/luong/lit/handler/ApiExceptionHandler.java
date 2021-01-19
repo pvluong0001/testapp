@@ -1,7 +1,9 @@
 package luong.lit.handler;
 
 import luong.lit.exception.FieldErrorException;
+import luong.lit.exception.UniqueDataException;
 import luong.lit.response.DataResponse;
+import luong.lit.response.ErrorMessageResponse;
 import luong.lit.response.MessageResponse;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpHeaders;
@@ -31,6 +33,12 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public MessageResponse notValidArgument() {
         return new MessageResponse("Argument is not valid!");
+    }
+
+    @ExceptionHandler(UniqueDataException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorMessageResponse handleUniqueDataException(UniqueDataException exception) {
+        return new ErrorMessageResponse(String.format("Field `%s` is already existed!", exception.getMessage()));
     }
 
     // error handle for @Valid

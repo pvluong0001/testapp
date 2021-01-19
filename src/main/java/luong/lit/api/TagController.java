@@ -1,8 +1,8 @@
 package luong.lit.api;
 
 import luong.lit.entity.Tag;
-import luong.lit.request.project.CreateTagRequest;
-import luong.lit.request.project.CreateTagRequest;
+import luong.lit.exception.UniqueDataException;
+import luong.lit.request.tag.CreateTagRequest;
 import luong.lit.response.DataResponse;
 import luong.lit.response.MessageResponse;
 import luong.lit.service.TagService;
@@ -23,14 +23,12 @@ public class TagController {
 
     @GetMapping()
     public DataResponse all(@RequestParam("s") String search) {
-        System.out.println(search);
-
         return new DataResponse(tagService.searchByName(search));
     }
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public DataResponse create(@Valid @RequestBody CreateTagRequest request) {
+    public DataResponse create(@Valid @RequestBody CreateTagRequest request) throws UniqueDataException {
         Tag tag = tagService.store(request);
 
         return new DataResponse(tag);

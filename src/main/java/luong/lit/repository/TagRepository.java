@@ -12,4 +12,6 @@ public interface TagRepository extends CrudRepository<Tag, Long> {
     public Optional<Tag> findByName(String name);
 
     public Iterable<Tag> findByNameContainingIgnoreCase(String name);
+
+    Boolean existsTagByName(String name);
 }

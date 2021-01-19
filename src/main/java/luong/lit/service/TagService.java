@@ -1,8 +1,9 @@
 package luong.lit.service;
 
 import luong.lit.entity.Tag;
+import luong.lit.exception.UniqueDataException;
 import luong.lit.repository.TagRepository;
-import luong.lit.request.project.CreateTagRequest;
+import luong.lit.request.tag.CreateTagRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,9 +16,14 @@ public class TagService {
         return tagRepository.findAll();
     }
 
-    public Tag store(CreateTagRequest resource) {
+    public Tag store(CreateTagRequest resource) throws UniqueDataException {
+        String tagName = resource.getName();
+        if (tagRepository.existsTagByName(tagName)) {
+            throw new UniqueDataException("name");
+        }
+
         Tag tag = new Tag();
-        tag.setName(resource.getName());
+        tag.setName(tagName);
 
         return tagRepository.save(tag);
     }

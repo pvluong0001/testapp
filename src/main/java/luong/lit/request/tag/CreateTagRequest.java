@@ -1,4 +1,4 @@
-package luong.lit.request.project;
+package luong.lit.request.tag;
 
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;

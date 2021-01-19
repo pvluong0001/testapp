@@ -1,11 +1,11 @@
 package luong.lit.api;
 
 import luong.lit.entity.Scenario;
-import luong.lit.request.project.CreateScenarioRequest;
+import luong.lit.exception.UniqueDataException;
+import luong.lit.request.scenario.CreateScenarioRequest;
 import luong.lit.response.DataResponse;
 import luong.lit.response.MessageResponse;
 import luong.lit.service.ScenarioService;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +25,7 @@ public class ScenarioController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public DataResponse create(@Valid @RequestBody CreateScenarioRequest request) {
+    public DataResponse create(@Valid @RequestBody CreateScenarioRequest request) throws UniqueDataException {
         Scenario scenario = scenarioService.store(request);
 
         return new DataResponse(scenario);

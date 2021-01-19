@@ -88,9 +88,6 @@ public class AuthController {
             Role userRole = roleRepository.findByName(ERole.ROLE_USER)
                     .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
             roles.add(userRole);
-
-            System.out.println("============ test");
-            System.out.println(userRole);
         }
 
         user.setRoles(roles);

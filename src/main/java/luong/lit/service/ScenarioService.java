@@ -1,19 +1,16 @@
 package luong.lit.service;
 
-import luong.lit.api.ProjectController;
 import luong.lit.entity.Scenario;
 import luong.lit.entity.Tag;
+import luong.lit.exception.UniqueDataException;
 import luong.lit.repository.ScenarioRepository;
 import luong.lit.repository.TagRepository;
-import luong.lit.request.project.CreateScenarioRequest;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import luong.lit.request.scenario.CreateScenarioRequest;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class ScenarioService {
@@ -28,13 +25,13 @@ public class ScenarioService {
         return scenarioRepository.findAll();
     }
 
-    public Scenario store(CreateScenarioRequest createScenarioRequest) {
+    public Scenario store(CreateScenarioRequest createScenarioRequest) throws UniqueDataException {
         Scenario scenario = new Scenario();
         scenario.setName(createScenarioRequest.getName());
         scenario.setDescription(createScenarioRequest.getDescription());
+        scenarioRepository.save(scenario);
 
         List<Tag> tags = (List<Tag>) tagRepository.findAllById(createScenarioRequest.getTags());
-
         scenario.setTags(tags);
 
         return scenarioRepository.save(scenario);
