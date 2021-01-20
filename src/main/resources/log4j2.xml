@@ -30,6 +30,12 @@
         <AsyncLogger name="org.springframework.boot" level="error" additivity="false">
             <AppenderRef ref="LogToConsole"/>
         </AsyncLogger>
+<!--        <AsyncLogger name="org.hibernate.SQL" level="debug" additivity="false">-->
+<!--            <AppenderRef ref="LogToConsole"/>-->
+<!--        </AsyncLogger>-->
+<!--        <AsyncLogger name="org.hibernate.type" level="trace" additivity="false">-->
+<!--            <AppenderRef ref="LogToConsole"/>-->
+<!--        </AsyncLogger>-->
         <Root level="error">
 <!--            <AppenderRef ref="LogToFile"/>-->
             <AppenderRef ref="LogToConsole"/>

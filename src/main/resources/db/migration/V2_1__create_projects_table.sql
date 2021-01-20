@@ -8,8 +8,8 @@ CREATE TABLE `projects` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_general_ci;
 
--- scenario table --
-CREATE TABLE `scenario` (
+-- scenarios table --
+CREATE TABLE `scenarios` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   `description` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
@@ -37,7 +37,7 @@ CREATE TABLE `project_scenario` (
   KEY `fk_project_id_ps` (`project_id`),
   KEY `fk_scenario_id_ps` (`scenario_id`),
   CONSTRAINT `fk_project_id_ps` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`),
-  CONSTRAINT `fk_scenario_id_ps` FOREIGN KEY (`scenario_id`) REFERENCES `scenario` (`id`)
+  CONSTRAINT `fk_scenario_id_ps` FOREIGN KEY (`scenario_id`) REFERENCES `scenarios` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_general_ci;
 
 -- tag_scenario table --
@@ -49,5 +49,5 @@ CREATE TABLE `tag_scenario` (
   KEY `fk_tag_id_ts` (`tag_id`),
   KEY `fk_scenario_id_ts` (`scenario_id`),
   CONSTRAINT `fk_tag_id_ts` FOREIGN KEY (`tag_id`) REFERENCES `tags` (`id`),
-  CONSTRAINT `fk_scenario_id_ts` FOREIGN KEY (`scenario_id`) REFERENCES `scenario` (`id`)
+  CONSTRAINT `fk_scenario_id_ts` FOREIGN KEY (`scenario_id`) REFERENCES `scenarios` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_general_ci;

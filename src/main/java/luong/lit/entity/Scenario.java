@@ -1,5 +1,6 @@
 package luong.lit.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
@@ -9,7 +10,7 @@ import javax.persistence.*;
 import java.util.*;
 
 @Entity
-@Table(name = "scenario")
+@Table(name = "scenarios")
 @Data
 public class Scenario {
     @Id
@@ -30,12 +31,11 @@ public class Scenario {
     @Column(name = "updated_at")
     private Date updatedAt;
 
-    @JsonManagedReference
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "tag_scenario",
-            joinColumns = @JoinColumn(name = "tag_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "scenario_id", referencedColumnName = "id")
+            joinColumns = @JoinColumn(name = "scenario_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id", referencedColumnName = "id")
     )
     private List<Tag> tags = new ArrayList<>();
 }

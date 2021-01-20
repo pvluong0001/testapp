@@ -29,9 +29,8 @@ public class ScenarioService {
         Scenario scenario = new Scenario();
         scenario.setName(createScenarioRequest.getName());
         scenario.setDescription(createScenarioRequest.getDescription());
-        scenarioRepository.save(scenario);
 
-        List<Tag> tags = (List<Tag>) tagRepository.findAllById(createScenarioRequest.getTags());
+        List<Tag> tags = (List<Tag>) tagRepository.findAllByIdIn(createScenarioRequest.getTags());
         scenario.setTags(tags);
 
         return scenarioRepository.save(scenario);
