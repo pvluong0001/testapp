@@ -32,13 +32,13 @@ public class ScenarioController {
     }
 
     @GetMapping("/{id}")
-    public DataResponse show(@Valid @PathVariable("id") Long projectId) {
-        return new DataResponse(scenarioService.show(projectId));
+    public DataResponse show(@Valid @PathVariable("id") Long id) {
+        return new DataResponse(scenarioService.show(id));
     }
 
     @DeleteMapping("/{id}")
-    public MessageResponse delete(@PathVariable("id") Long projectId) {
-        scenarioService.delete(projectId);
+    public MessageResponse delete(@PathVariable("id") Long id) {
+        scenarioService.delete(id);
 
         return new MessageResponse("Delete success");
     }

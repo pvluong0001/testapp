@@ -4,7 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.*;
@@ -12,6 +14,8 @@ import java.util.*;
 @Entity
 @Table(name = "scenarios")
 @Data
+@SQLDelete(sql = "UPDATE scenarios SET deleted_at=CURRENT_TIMESTAMP() WHERE id=?")
+@Where(clause = "deleted_at is null")
 public class Scenario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,6 +34,9 @@ public class Scenario {
     @UpdateTimestamp
     @Column(name = "updated_at")
     private Date updatedAt;
+
+    @Column(name = "deleted_at")
+    private Date deletedAt;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
