@@ -23,6 +23,9 @@ public class Project {
     @Column()
     private String name;
 
+    @Column()
+    private String description;
+
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
     private Date createdAt;

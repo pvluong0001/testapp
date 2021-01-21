@@ -27,7 +27,8 @@ public class ProjectService {
     public Project update(Long id, CreateProjectRequest request) {
         Project project = projectRepository.findById(id).orElseThrow(IndexOutOfBoundsException::new);
 
-        project.setName(request.name);
+        project.setName(request.getName());
+        project.setDescription(request.getDescription());
         projectRepository.save(project);
 
         return project;

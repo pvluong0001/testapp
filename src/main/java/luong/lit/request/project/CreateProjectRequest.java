@@ -11,5 +11,6 @@ public class CreateProjectRequest {
     @Length(max = 255)
     @NotBlank
     @NotNull
-    public String name;
+    private String name;
+    private String description;
 }
