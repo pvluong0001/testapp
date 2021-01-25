@@ -22,7 +22,12 @@ public class TagController {
     ModelMapper modelMapper;
 
     @GetMapping()
-    public DataResponse all(@RequestParam("s") String search) {
+    public DataResponse all() {
+        return new DataResponse(tagService.getAll());
+    }
+
+    @GetMapping("/search")
+    public DataResponse search(@RequestParam("s") String search) {
         return new DataResponse(tagService.searchByName(search));
     }
 

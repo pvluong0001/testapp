@@ -1,6 +1,7 @@
 package luong.lit.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
@@ -44,5 +45,6 @@ public class Scenario {
             joinColumns = @JoinColumn(name = "scenario_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "tag_id", referencedColumnName = "id")
     )
+    @JsonIgnoreProperties("scenarios")
     private List<Tag> tags = new ArrayList<>();
 }

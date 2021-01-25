@@ -1,7 +1,6 @@
 package luong.lit.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -19,7 +18,7 @@ public class Tag {
     @Column(unique = true)
     private String name;
 
-    @JsonIgnore
     @ManyToMany(mappedBy = "tags", fetch = FetchType.LAZY)
+    @JsonIgnoreProperties("tags")
     private List<Scenario> scenarios = new ArrayList<>();
 }
