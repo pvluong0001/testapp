@@ -47,4 +47,13 @@ public class Scenario {
     )
     @JsonIgnoreProperties("scenarios")
     private List<Tag> tags = new ArrayList<>();
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "scenario_testcase",
+            joinColumns = @JoinColumn(name = "scenario_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "testcase_id", referencedColumnName = "id")
+    )
+    @JsonIgnoreProperties("scenarios")
+    private List<Testcase> testcases = new ArrayList<>();
 }

@@ -1,20 +1,22 @@
 package luong.lit.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.UpdateTimestamp;
-import org.hibernate.annotations.Where;
+import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name="projects")
 @Data
 @SQLDelete(sql = "UPDATE projects SET deleted_at=CURRENT_TIMESTAMP() WHERE id=?")
 @Where(clause = "deleted_at is null")
+@DynamicUpdate
 public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,4 +46,8 @@ public class Project {
             inverseJoinColumns = @JoinColumn(name = "scenario_id")
     )
     private List<Scenario> scenarios;
+
+    @OneToMany(mappedBy = "project")
+    @JsonIgnore
+    private Set<ProjectScenario> projectScenarios;
 }

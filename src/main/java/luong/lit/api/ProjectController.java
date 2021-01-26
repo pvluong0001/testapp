@@ -2,6 +2,7 @@ package luong.lit.api;
 
 import luong.lit.entity.Project;
 import luong.lit.request.project.CreateProjectRequest;
+import luong.lit.request.project.UpdateScenarioRequest;
 import luong.lit.response.DataResponse;
 import luong.lit.response.MessageResponse;
 import luong.lit.service.ProjectService;
@@ -48,6 +49,16 @@ public class ProjectController {
         @Valid @RequestBody CreateProjectRequest request
     ) {
         Project project = projectService.update(projectId, request);
+
+        return new DataResponse(project);
+    }
+
+    @RequestMapping(path = "/{id}/set-scenarios", method = {RequestMethod.PATCH, RequestMethod.PUT})
+    public DataResponse setScenario(
+            @PathVariable("id") Long projectId,
+            @Valid @RequestBody UpdateScenarioRequest request
+    ) {
+        Project project = projectService.updateScenario(projectId, request);
 
         return new DataResponse(project);
     }

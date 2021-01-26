@@ -11,4 +11,6 @@ import java.util.List;
 public interface ScenarioRepository extends CrudRepository<Scenario, Long> {
     @EntityGraph(attributePaths = {"tags"})
     List<Scenario> findAll();
+
+    public Iterable<Scenario> findAllByIdIn(List<Long> ids);
 }
