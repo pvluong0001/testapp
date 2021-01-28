@@ -63,6 +63,7 @@ public class AuthController {
         return new DataResponse(new JwtResponse(jwt,
                 userDetails.getId(),
                 userDetails.getUsername(),
+                userDetails.getName(),
                 userDetails.getEmail(),
                 roles));
     }
@@ -79,6 +80,7 @@ public class AuthController {
         User user = new User();
         user.setEmail(signUpRequest.getEmail());
         user.setUsername(signUpRequest.getUsername());
+        user.setName(signUpRequest.getName());
         user.setPassword(encoder.encode(signUpRequest.getPassword()));
 
         Set<String> strRoles = signUpRequest.getRole();
