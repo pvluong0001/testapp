@@ -2,6 +2,7 @@ package luong.lit.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import luong.lit.service.Slug;
 import org.hibernate.annotations.*;
 
 import javax.persistence.*;
@@ -26,6 +27,9 @@ public class Project {
     private String name;
 
     @Column()
+    private String slug;
+
+    @Column()
     private String description;
 
     @CreationTimestamp
@@ -38,6 +42,16 @@ public class Project {
 
     @Column(name = "deleted_at")
     private Date deletedAt;
+
+    @PrePersist
+    public void prePersist() {
+        slug = Slug.makeSlug(name);
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        slug = Slug.makeSlug(name);
+    }
 
     @ManyToMany
     @JoinTable(
