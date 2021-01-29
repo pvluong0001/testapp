@@ -2,6 +2,7 @@ package luong.lit.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import luong.lit.security.entity.User;
 import luong.lit.service.Slug;
 import org.hibernate.annotations.*;
 
@@ -60,6 +61,14 @@ public class Project {
             inverseJoinColumns = @JoinColumn(name = "scenario_id")
     )
     private List<Scenario> scenarios;
+
+    @ManyToMany
+    @JoinTable(
+            name = "project_user",
+            joinColumns = @JoinColumn(name = "project_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private List<User> users;
 
     @OneToMany(mappedBy = "project")
     @JsonIgnore

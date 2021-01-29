@@ -2,6 +2,8 @@ package luong.lit.api;
 
 import luong.lit.entity.Project;
 import luong.lit.request.project.CreateProjectRequest;
+import luong.lit.request.project.InviteUserRequest;
+import luong.lit.request.project.RemoveUserRequest;
 import luong.lit.request.project.UpdateScenarioRequest;
 import luong.lit.response.DataResponse;
 import luong.lit.response.MessageResponse;
@@ -34,6 +36,31 @@ public class ProjectController {
         Project data = modelMapper.map(request, Project.class);
 
         Project project = projectService.store(data);
+
+        return new DataResponse(project);
+    }
+
+    @GetMapping("/find/{slug}")
+    public DataResponse show(@Valid @PathVariable("slug") String slug) {
+        return new DataResponse(projectService.findBySlug(slug));
+    }
+
+    @PostMapping("/{id}/invite-user")
+    public DataResponse inviteUser(
+            @Valid @PathVariable("id") Long projectId,
+            @Valid @RequestBody InviteUserRequest inviteUserRequest
+    ) {
+        Project project = projectService.inviteUsers(projectId, inviteUserRequest.getUsers());
+
+        return new DataResponse(project);
+    }
+
+    @PostMapping("/{id}/remove-user")
+    public DataResponse removeUser(
+            @Valid @PathVariable("id") Long projectId,
+            @Valid @RequestBody RemoveUserRequest removeUserRequest
+    ) {
+        Project project = projectService.removeUser(projectId, removeUserRequest.getId());
 
         return new DataResponse(project);
     }
